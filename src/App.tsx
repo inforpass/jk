@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Palette, Settings, ShoppingCart } from 'lucide-react';
+import { Palette, Settings, ShoppingCart, Webhook } from 'lucide-react';
 import StepIndicator from './components/StepIndicator';
 import ApiKeySetup from './components/ApiKeySetup';
 import ApiDashboard from './components/ApiDashboard';
 import WooCommerceIntegration from './components/WooCommerceIntegration';
+import WebhookManager from './components/WebhookManager';
 import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import Step3 from './components/Step3';
@@ -18,6 +19,7 @@ function App() {
   const [showApiKeySetup, setShowApiKeySetup] = useState(false);
   const [showApiDashboard, setShowApiDashboard] = useState(false);
   const [showWooCommerce, setShowWooCommerce] = useState(false);
+  const [showWebhookManager, setShowWebhookManager] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     companyName: '',
     sector: '',
@@ -119,6 +121,15 @@ function App() {
             
             <div className="flex items-center gap-2">
               <button
+                onClick={() => setShowWebhookManager(true)}
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors"
+                title="Gerenciar Webhooks"
+              >
+                <Webhook size={16} />
+                Webhooks
+              </button>
+              
+              <button
                 onClick={() => setShowWooCommerce(true)}
                 className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors"
                 title="Integração WooCommerce"
@@ -172,6 +183,10 @@ function App() {
           formData={formData}
           onClose={() => setShowWooCommerce(false)} 
         />
+      )}
+      
+      {showWebhookManager && (
+        <WebhookManager onClose={() => setShowWebhookManager(false)} />
       )}
       {/* Footer */}
       <footer className="bg-white/80 backdrop-blur-md border-t border-gray-200 mt-12">
